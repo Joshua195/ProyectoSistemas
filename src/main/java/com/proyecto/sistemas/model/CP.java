@@ -7,6 +7,9 @@ import java.io.Serializable;
 @Table(name = "cp")
 public class CP implements Serializable{
 
+    public CP() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idcp;

@@ -435,6 +435,9 @@ public class UserController {
             request.setAttribute("nologin" , "nologin");
             return "redirect:/login";
         }
+        User user = (User) request.getSession().getAttribute("user");
+        List<CompraItem> comprasByUser = getComprasByUser(user.getIdusers());
+        request.setAttribute("compras", comprasByUser);
         return "historial";
     }
 
@@ -452,6 +455,36 @@ public class UserController {
             }
         }
         return null;
+    }
+
+    private List<CompraItem> getComprasByUser(Integer idUser){
+        List<Compra> compraList = compraRepository.findAll();
+        List<CompraItem> result = new ArrayList<>();
+        for (Compra compra : compraList){
+            if (compra.getIdusuario() == idUser){
+                List<Producto> productosByCompra = getProductosByCompra(compra.getIdcompras());
+                CompraItem compraItem = new CompraItem(compra.getIdcompras(),compra.getFecha(), compra.getTotal(),
+                        compra.getIdenvio(),compra.getIdusuario(),productosByCompra);
+                result.add(compraItem);
+            }
+        }
+        return result;
+    }
+
+    private List<Producto> getProductosByCompra(Integer idCompra){
+        List<CP> cps = cpRepository.findAll();
+        List<CP> cpByCompra = new ArrayList<>();
+        for (CP cp : cps){
+            if (cp.getIdcompra() == idCompra){
+                cpByCompra.add(cp);
+            }
+        }
+        List<Producto> result = new ArrayList<>();
+        for (CP cp : cpByCompra){
+            Producto producto = productoRepository.findOne(cp.getIdproducto());
+            result.add(producto);
+        }
+        return result;
     }
 
 

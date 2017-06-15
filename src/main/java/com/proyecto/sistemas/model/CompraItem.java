@@ -1,32 +1,26 @@
 package com.proyecto.sistemas.model;
 
-import javax.persistence.*;
-import java.io.Serializable;
-//import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.List;
 
-@Entity
-@Table(name = "compras")
-public class Compra implements Serializable{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class CompraItem {
     private Integer idcompras;
     private LocalDate fecha;
     private Double total;
     private Integer idenvio;
     private Integer idusuario;
+    private List<Producto> productos;
 
-    public Compra() {
+    public CompraItem() {
     }
 
-    public Compra(LocalDate fecha, Double total, Integer idenvio, Integer idusuario) {
+    public CompraItem(Integer idcompras, LocalDate fecha, Double total, Integer idenvio, Integer idusuario, List<Producto> productos) {
+        this.idcompras = idcompras;
         this.fecha = fecha;
         this.total = total;
         this.idenvio = idenvio;
         this.idusuario = idusuario;
+        this.productos = productos;
     }
 
     public Integer getIdcompras() {
@@ -69,14 +63,23 @@ public class Compra implements Serializable{
         this.idusuario = idusuario;
     }
 
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
+
     @Override
     public String toString() {
-        return "Compra{" +
+        return "CompraItem{" +
                 "idcompras=" + idcompras +
                 ", fecha=" + fecha +
                 ", total=" + total +
                 ", idenvio=" + idenvio +
                 ", idusuario=" + idusuario +
+                ", productos=" + productos +
                 '}';
     }
 }

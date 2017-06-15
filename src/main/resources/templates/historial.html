@@ -26,20 +26,20 @@
                 <h4 class="panel-title">
                     <div>
                         &emsp;&emsp;
-                        <span th:text="'#' + ${compra.idcompra}"></span>
+                        <span th:text="'#' + ${compra.idcompras}"></span>
                         &ensp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                         <span th:text="${compra.fecha}"></span>
                         &emsp;&emsp;&emsp;&emsp;
-                        $<span th:text="${compra.precio}"></span>
+                        $<span th:text="${compra.total}"></span>
                         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                        <a data-toggle="collapse" data-parent="#accordion" th:href="'#collapse' + ${it}">View Details</a>
+                        <a data-toggle="collapse" data-parent="#accordion" th:href="'#collapse' + ${it.index}">View Details</a>
                     </div>
                 </h4>
             </div>
-            <div th:id="'collapse' + ${it}" class="panel-collapse collapse">
-                <div th:each="prod : ${productos}" class="panel-body">
+            <div th:id="'collapse' + ${it.index}" class="panel-collapse collapse">
+                <div th:each="prod : ${compra.productos}" class="panel-body">
                     <div id="cuerpo" style="border-right-width: 70px">
-                        <b>ID Producto:  </b><span th:text="${prod.idprod}"></span><br></br>
+                        <b>ID Producto:  </b><span th:text="${prod.idproducto}"></span><br></br>
                         <b>Nombre:       </b><span th:text="${prod.nombre}"></span><br></br>
                         <b>Precio:       </b><span th:text="'$' + ${prod.precio}"></span><br></br>
                     </div>  <!-- /div panel-body -->
