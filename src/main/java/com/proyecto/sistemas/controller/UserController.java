@@ -429,6 +429,14 @@ public class UserController {
         return "estadisticas";
     }
 
+    @GetMapping("/historial")
+    public String historial(HttpServletRequest request){
+        if(!checkSession(request)){
+            request.setAttribute("nologin" , "nologin");
+            return "redirect:/login";
+        }
+        return "historial";
+    }
 
     public static void saveCookie(String cookieName, String value, int maxAge, HttpServletResponse response) {
         Cookie cookie = new Cookie(cookieName, value);

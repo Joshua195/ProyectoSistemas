@@ -113,40 +113,60 @@
                 <legend>Formulario de Envío</legend>
                 <!-- Text input-->
                 <div class="form-group">
-                  <label class="col-md-2 control-label">Dirección</label> 
+                  <label class="col-md-2 control-label">Calle</label>
                   <div class="col-md-10 inputGroupContainer">
                     <div class="input-group">
-                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                      <input name="address" placeholder="Sierra Nevada #12, Fraccionamiento Las Rosas" class="form-control"  type="text" />
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                      <input name="calle" placeholder="Sierra Nevada" class="form-control"  type="text" />
                     </div>
                   </div>
                 </div>
+                  <!-- Text input-->
+                  <div class="form-group">
+                      <label class="col-md-2 control-label">Numero #</label>
+                      <div class="col-md-10 inputGroupContainer">
+                          <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                              <input name="number" placeholder="#12" class="form-control"  type="number" min="0"/>
+                          </div>
+                      </div>
+                  </div>
+                  <!-- Text input-->
+                  <div class="form-group">
+                      <label class="col-md-2 control-label">Colonia</label>
+                      <div class="col-md-10 inputGroupContainer">
+                          <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                              <input name="colonia" placeholder="Las Rosas" class="form-control"  type="text" />
+                          </div>
+                      </div>
+                  </div>
                 <!-- Text input-->
                 <div class="form-group">
-                  <label class="col-md-2 control-label">Ciudad</label> 
+                  <label class="col-md-2 control-label">Ciudad</label>
                   <div class="col-md-10 inputGroupContainer">
                     <div class="input-group">
-                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                       <input name="city" placeholder="Aguascalientes" class="form-control"  type="text" />
                     </div>
                   </div>
                 </div>
                 <!-- Text input-->
                 <div class="form-group">
-                  <label class="col-md-2 control-label">Código postal</label> 
+                  <label class="col-md-2 control-label">Código postal</label>
                   <div class="col-md-10 inputGroupContainer">
                     <div class="input-group">
-                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                       <input name="postal" placeholder="20000" class="form-control"  type="text" />
                     </div>
                   </div>
                 </div>
-                 <!-- Select Basic -->                   
-                <div class="form-group"> 
+                 <!-- Select Basic -->
+                <div class="form-group">
                   <label class="col-md-2 control-label">País</label>
                   <div class="col-md-10 selectContainer">
                     <div class="input-group">
-                       <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                       <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
                        <select name="country" id="country" class="form-control selectpicker" onchange="calculos()">
                           <option>México</option>
                           <option>Argentina</option>
@@ -156,13 +176,13 @@
                         </select>
                     </div>
                   </div>
-                </div> 
+                </div>
                 <!-- Text input-->
                 <div class="form-group">
                   <label class="col-md-2 control-label">Telefono de contacto</label> 
                   <div class="col-md-10 inputGroupContainer">
                     <div class="input-group">
-                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
                       <input name="phone" placeholder="+52 123 456789" class="form-control"  type="text" />
                     </div>
                   </div>
