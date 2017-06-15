@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content=""/>
+    <title>CompuCom - Historial de Compras</title>
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{css/shop-homepage.css}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Quicksand|Roboto" rel="stylesheet" />
+    <link rel="shortcut icon" th:href="@{resources/imagenes/Logotipos/logo.ico}" />
+    <link rel="stylesheet" th:href="@{css/style.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/shopping-cart.css}"/>
+</head>
+<body>
+<div th:replace="fragments/navHeader :: navHeader">&nbsp;</div>
+<!-- Page Content -->
+<div class="container">
+    <center><h1>Mi Historial</h1></center>
+    <h3>#_Compra &emsp;&emsp;&emsp; Fecha &emsp;&emsp;&emsp; Importe </h3>
+    <div th:each="compra,it : ${compras}" class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <div>
+                        &emsp;&emsp;
+                        <span th:text="'#' + ${compra.idcompra}"></span>
+                        &ensp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                        <span th:text="${compra.fecha}"></span>
+                        &emsp;&emsp;&emsp;&emsp;
+                        $<span th:text="${compra.precio}"></span>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                        <a data-toggle="collapse" data-parent="#accordion" th:href="'#collapse' + ${it}">View Details</a>
+                    </div>
+                </h4>
+            </div>
+            <div th:id="'collapse' + ${it}" class="panel-collapse collapse">
+                <div th:each="prod : ${productos}" class="panel-body">
+                    <div id="cuerpo" style="border-right-width: 70px">
+                        <b>ID Producto:  </b><span th:text="${prod.idprod}"></span><br></br>
+                        <b>Nombre:       </b><span th:text="${prod.nombre}"></span><br></br>
+                        <b>Precio:       </b><span th:text="'$' + ${prod.precio}"></span><br></br>
+                    </div>  <!-- /div panel-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Content -->
+
+
+<div th:replace="fragments/navHeader :: footer">&nbsp;</div>
+<script th:src="@{js/jquery.js}"></script>
+<script th:src="@{js/bootstrap.min.js}"></script>
+</body>
+
+</html>
