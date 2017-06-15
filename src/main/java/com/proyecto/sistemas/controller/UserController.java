@@ -1,18 +1,13 @@
 package com.proyecto.sistemas.controller;
 
-import com.proyecto.sistemas.model.Item;
-import com.proyecto.sistemas.model.Producto;
-import com.proyecto.sistemas.model.User;
-import com.proyecto.sistemas.model.Venta;
-import com.proyecto.sistemas.repository.ProductoRepository;
-import com.proyecto.sistemas.repository.UserRepository;
-import com.proyecto.sistemas.repository.VentasRepository;
+import com.proyecto.sistemas.model.*;
+//import com.proyecto.sistemas.model.Venta;
+import com.proyecto.sistemas.repository.*;
+//import com.proyecto.sistemas.repository.VentasRepository;
 import com.proyecto.sistemas.utils.CryptMD5;
 import com.proyecto.sistemas.utils.SendMail;
-import com.sun.xml.internal.fastinfoset.algorithm.IntEncodingAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -20,6 +15,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.*;
 
 @SuppressWarnings({"Duplicates", "unchecked"})
@@ -33,7 +29,13 @@ public class UserController {
     private ProductoRepository productoRepository;
 
     @Autowired
-    private VentasRepository ventasRepository;
+    private PERepository peRepository;
+    @Autowired
+    private EnvioRepository envioRepository;
+    @Autowired
+    private CompraRepository compraRepository;
+    @Autowired
+    private CPRepository cpRepository;
 
     private ArrayList<String> sesionesActivas = new ArrayList<>();
 
@@ -232,12 +234,13 @@ public class UserController {
             return "redirect:/login";
         }
         Producto producto = productoRepository.findOne(id);
+        PE pe = getPE(id);
         if (request.getSession().getAttribute("items") != null){
             List<Item> items = (List<Item>) request.getSession().getAttribute("items");
             boolean nuevoItem = true;
             for (Item item : items){
                 if (item.getIdproducto() == producto.getIdproducto()){
-                    Integer existenciaActual = producto.getExistencia() - (item.getCantidad() + 1);
+                    Integer existenciaActual = pe.getExistencia() - (item.getCantidad() + 1);
                     if (existenciaActual > 0) {
                         item.setCantidad(item.getCantidad() + 1);
                         nuevoItem = false;
@@ -248,7 +251,7 @@ public class UserController {
                 }
             }
             if (nuevoItem){
-                Integer existenciaActual = producto.getExistencia() - 1;
+                Integer existenciaActual = pe.getExistencia() - 1;
                 if (existenciaActual > 0) {
                     Item item = new Item(producto.getIdproducto(), producto.getNombre(), producto.getCategoria(), 1,
                             producto.getPrecio(), producto.getDescripcion());
@@ -263,11 +266,7 @@ public class UserController {
             request.getSession().setAttribute("itemscarrito", items.size());
         }else {
             List<Item> items = new ArrayList<>();
-//            Item item = new Item(producto.getIdproducto(),producto.getNombre(),producto.getCategoria(), 1,
-//                    producto.getPrecio(),producto.getDescripcion());
-//            item.setDescuento(test);
-//            items.add(item);
-            Integer existenciaActual = producto.getExistencia() - 1;
+            Integer existenciaActual = pe.getExistencia() - 1;
             if (existenciaActual > 0) {
                 Item item = new Item(producto.getIdproducto(), producto.getNombre(), producto.getCategoria(), 1,
                         producto.getPrecio(), producto.getDescripcion());
@@ -324,8 +323,8 @@ public class UserController {
 
     @PostMapping("/proceso-pago")
     public String procesoPago(HttpServletRequest request, Double iva, String cuponFinal, Double gastosenvio, Double totalFinal,
-                              String address, String city, Integer postal, String country, String phone,
-                              Integer noTargeta){
+                              String calle, Integer number, String colonia, String city, Integer postal, String country,
+                              String phone, Integer noTargeta){
         if(!checkSession(request)){
             request.setAttribute("nologin" , "nologin");
             return "redirect:/login";
@@ -333,55 +332,19 @@ public class UserController {
         List<Item> items = (List<Item>) request.getSession().getAttribute("items");
         Double subtotal = (Double) request.getSession().getAttribute("total");
         User user = (User) request.getSession().getAttribute("user");
-        String mensaje = "Querido " + user.getNombre() + ":\n\nTe presentamos tu orden de compra:\n\n";
+        Envio envio = new Envio(calle,colonia,number,city,country,postal,phone);
+        envioRepository.save(envio);
+        LocalDate localDate = LocalDate.now();
+        Compra compra = new Compra(localDate,totalFinal,envio.getIdenvio(),user.getIdusers());
+        compraRepository.save(compra);
         for (Item item : items){
-            if (item.isDescuento()){
-                mensaje += "Producto :\t" + item.getNombre() + "\tDescuento:\t 10%" +  "\tCantidad: \t" + item.getCantidad() + "\n";
-            }else {
-                mensaje += "Producto :\t" + item.getNombre() + "\tCantidad: \t" + item.getCantidad() + "\n";
-            }
+            CP cp = new CP(compra.getIdcompras(),item.getIdproducto());
+            cpRepository.save(cp);
+            PE pe = getPE(item.getIdproducto());
+            Integer existencia = pe.getExistencia() - item.getCantidad();
+            pe.setExistencia(existencia);
+            peRepository.save(pe);
         }
-        mensaje += "\nTus datos de Envio: \n\nDireccion: \t" + address + "\n";
-        mensaje += "Ciudad: \t" + city + "\n";
-        mensaje += "Codigo Postal: \t" + postal + "\n";
-        mensaje += "Pais: \t" + country + "\n";
-        mensaje += "Telefono de contacto: \t" + phone + "\n";
-
-        mensaje += "\nDesglose de importes:\n\n";
-        mensaje += "Subtotal: \t" + subtotal + "\n";
-        mensaje += "IVA: \t" + iva + "\n";
-        mensaje += "Cupon Aplicado: \t" + cuponFinal + "\n";
-        mensaje += "Gastos de Envio: \t" + gastosenvio + "\n";
-        mensaje += "Gran Total: \t" + totalFinal + "\n";
-        mensaje += "\n\nAttn: CompuCom Tus especialistas en tecnologia";
-        SendMail sendMail = new SendMail(mensaje,"CompuCom - Informacion de Compra", user.getCorreo());
-        sendMail.send();
-
-
-        Venta ventasDD = ventasRepository.findOne(1);
-        Venta ventasTeclado = ventasRepository.findOne(2);
-        Venta ventasMonitor = ventasRepository.findOne(3);
-        Venta ventasMouse = ventasRepository.findOne(4);
-
-        for (Item item: items){
-            Producto producto = productoRepository.findOne(item.getIdproducto());
-            Integer existencia = producto.getExistencia() - item.getCantidad();
-            producto.setExistencia(existencia);
-            productoRepository.save(producto);
-            if (item.getCategoria().equals("Disco duro")){
-                ventasDD.setAcumulado(ventasDD.getAcumulado() + item.getCantidad());
-            }else if (item.getCategoria().equals("Teclado")){
-                ventasTeclado.setAcumulado(ventasTeclado.getAcumulado() + item.getCantidad());
-            }else if (item.getCategoria().equals("Monitor")){
-                ventasMonitor.setAcumulado(ventasMonitor.getAcumulado() + item.getCantidad());
-            }else if (item.getCategoria().equals("Mouse")){
-                ventasMouse.setAcumulado(ventasMouse.getAcumulado() + item.getCantidad());
-            }
-        }
-        ventasRepository.save(ventasDD);
-        ventasRepository.save(ventasTeclado);
-        ventasRepository.save(ventasMonitor);
-        ventasRepository.save(ventasMouse);
         request.getSession().setAttribute("items", null);
         request.getSession().setAttribute("itemscarrito", null);
         return "redirect:/";
@@ -455,14 +418,14 @@ public class UserController {
             request.setAttribute("nologin" , "nologin");
             return "redirect:/login";
         }
-        Venta ventasDD = ventasRepository.findOne(1);
+        /*Venta ventasDD = ventasRepository.findOne(1);
         Venta ventasTeclado = ventasRepository.findOne(2);
         Venta ventasMonitor = ventasRepository.findOne(3);
         Venta ventasMouse = ventasRepository.findOne(4);
         request.setAttribute("dd", ventasDD);
         request.setAttribute("teclado", ventasTeclado);
         request.setAttribute("monitor", ventasMonitor);
-        request.setAttribute("mouse", ventasMouse);
+        request.setAttribute("mouse", ventasMouse);*/
         return "estadisticas";
     }
 
@@ -471,6 +434,16 @@ public class UserController {
         Cookie cookie = new Cookie(cookieName, value);
         cookie.setMaxAge(maxAge);
         response.addCookie(cookie);
+    }
+
+    private PE getPE(Integer idProducto){
+        List<PE> list = peRepository.findAll();
+        for (PE pe : list){
+            if (pe.getIdproducto() == idProducto){
+                return pe;
+            }
+        }
+        return null;
     }
 
 

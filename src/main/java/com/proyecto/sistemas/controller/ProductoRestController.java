@@ -28,7 +28,7 @@ public class ProductoRestController {
         try {
             producto.setNombre(name);
             producto.setCategoria(categoria);
-            producto.setExistencia(existencia);
+//            producto.setExistencia(existencia);
             producto.setPrecio(precio);
             producto.setDescripcion(descripcion);
             producto.setImagen(imagen.getBytes());
@@ -48,7 +48,7 @@ public class ProductoRestController {
         try{
             producto.setNombre(name);
             producto.setCategoria(categoria);
-            producto.setExistencia(existencia);
+//            producto.setExistencia(existencia);
             producto.setPrecio(precio);
             producto.setDescripcion(descripcion);
             producto.setImagen(imagen.getBytes());

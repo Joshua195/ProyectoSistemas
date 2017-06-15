@@ -14,7 +14,6 @@ public class Producto implements Serializable{
     private Integer idproducto;
     private String nombre;
     private String categoria;
-    private Integer existencia;
     private Double precio;
     private String descripcion;
     @Lob
@@ -23,10 +22,9 @@ public class Producto implements Serializable{
     public Producto() {
     }
 
-    public Producto(String nombre, String categoria, Integer existencia, Double precio, byte[] imagen) {
+    public Producto(String nombre, String categoria, Double precio, byte[] imagen) {
         this.nombre = nombre;
         this.categoria = categoria;
-        this.existencia = existencia;
         this.precio = precio;
         this.imagen = imagen;
     }
@@ -53,14 +51,6 @@ public class Producto implements Serializable{
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
-    }
-
-    public Integer getExistencia() {
-        return existencia;
-    }
-
-    public void setExistencia(Integer existencia) {
-        this.existencia = existencia;
     }
 
     public Double getPrecio() {
@@ -93,7 +83,6 @@ public class Producto implements Serializable{
                 "idproducto=" + idproducto +
                 ", nombre='" + nombre + '\'' +
                 ", categoria='" + categoria + '\'' +
-                ", existencia=" + existencia +
                 ", precio=" + precio +
                 ", descripcion='" + descripcion + '\'' +
                 ", imagen=" + Arrays.toString(imagen) +
