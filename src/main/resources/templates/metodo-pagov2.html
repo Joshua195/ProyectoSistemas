@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content=""/>
+    <title>CompuCom - Pago</title>
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{css/shop-homepage.css}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Quicksand|Roboto" rel="stylesheet" />
+    <link rel="shortcut icon" th:href="@{resources/imagenes/Logotipos/logo.ico}" />
+    <link rel="stylesheet" th:href="@{css/style.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/shopping-cart.css}"/>
+</head>
+<body onload="calculos()">
+<div th:replace="fragments/navHeader :: navHeader">&nbsp;</div>
+<!-- Page Content -->
+<div id="shopping-area">
+    <div class="container-fluid breadcrumbBox text-center">
+        <ol class="breadcrumb">
+            <li><a href="/">Selección</a></li>
+            <li><a href="/carrito">Verificación</a></li>
+            <li class="active"><a href="#">Pago</a></li>
+        </ol>
+    </div>
+
+    <div class="container text-center">
+
+        <div class="col-md-5 col-sm-12">
+            <div class="bigcart"></div>
+            <h1>Forma de pago</h1>
+            <p>
+                Elige la forma de pago que más te acomode.<br></br>
+                Y por favor rellene el formulario de envío que tenemos abajo.<br></br>
+                [Cupones: feliznavidad, cumple, vacaciones]
+            </p><br></br>
+            Cupon de descuento: <input type="text" name="cupon" id="cupon" onkeyup="calculos()" />
+        </div>
+
+
+        <div class="col-sm-6 col-lg-6 col-md-6 text-left">
+            <ul>
+                <li>
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <label for="">
+                                    <h4 class="panel-title">
+                                        <input type="radio" name="radio-pago1" id="radio-pago1" disabled="" />&nbsp;
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" onclick="radios(1)">
+                                            <b>Tarjeta de crédito</b>
+                                            <img th:src="@{resources/imagenes/mas/visa.png}" alt="Visa" height="40" width="40" id="pago" />
+                                            <img th:src="@{resources/imagenes/mas/master-card.png}" alt="Master Card" height="40" width="40" />
+                                            <img th:src="@{resources/imagenes/mas/amex.png}" alt="American Express" height="40" width="40" />
+                                        </a>
+                                    </h4>
+                                </label>
+                            </div>
+                            <div id="collapse1" class="panel-collapse collapse">
+                                <div class="panel-body">
+
+                                    <form id="creditCardForm" class="form-horizontal">
+
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-xs-5 control-label">Tipo de tarjeta</label>
+                                            <div class="col-xs-5 selectContainer">
+                                                <select class="form-control" name="cardType">
+                                                    <option value="">Selecciona un tipo</option>
+                                                    <option value="Ae">American Express</option>
+                                                    <option value="Master">Master</option>
+                                                    <option value="Visa">Visa</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-xs-5 control-label">Numero de tarjeta de crédito</label>
+                                            <div class="col-xs-5">
+                                                <input type="text" class="form-control" name="cc" />
+                                            </div>
+                                        </div>
+                                        <pre>[Ej: 340653705597107, 6762835098779303, 5303765013600904]</pre><br></br>
+
+                                        <!-- Select Basic -->
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label">Fecha de vencimiento *<br></br></label>
+                                            <div class="col-md-3 selectContainer">
+                                                <div class="input-group">
+                                                    <select name="mes" class="form-control selectpicker">
+                                                        <option value=" ">MM</option>
+                                                        <option>01</option>
+                                                        <option>02</option>
+                                                        <option>03</option>
+                                                        <option>04</option>
+                                                        <option>05</option>
+                                                        <option>06</option>
+                                                        <option>07</option>
+                                                        <option>08</option>
+                                                        <option>09</option>
+                                                        <option>10</option>
+                                                        <option>11</option>
+                                                        <option>12</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Select Basic -->
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label"> <br></br></label>
+                                            <div class="col-md-3 selectContainer">
+                                                <div class="input-group">
+                                                    <select name="año" class="form-control selectpicker">
+                                                        <option value=" ">AA</option>
+                                                        <option>2016</option>
+                                                        <option>2017</option>
+                                                        <option>2018</option>
+                                                        <option>2019</option>
+                                                        <option>2020</option>
+                                                        <option>2021</option>
+                                                        <option>2022</option>
+                                                        <option>2023</option>
+                                                        <option>2024</option>
+                                                        <option>2025</option>
+                                                        <option>2026</option>
+                                                        <option>2027</option>
+                                                        <option>2028</option>
+                                                        <option>2029</option>
+                                                        <option>2030</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label">Titular de la tarjeta</label>
+                                            <div class="col-md-7 inputGroupContainer">
+                                                <div class="input-group">
+                                                    <input name="titular" class="form-control"  type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label">Código de seguridad</label>
+                                            <div class="col-md-3 inputGroupContainer">
+                                                <div class="input-group">
+                                                    <input name="codigo" class="form-control"  type="text" />
+                                                    <img th:src="@{resources/imagenes/mas/tarjeta.jpg}" alt="" width="170" height="35" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Button -->
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label"></label>
+                                            <div class="col-md-10">
+                                                <button type="submit" class="btn btn-warning" style="background-color: #ff6666" id="validacion0" value="">Validar</button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- PAGO CON PAYPAL -->
+                                <div class="panel-heading">
+                                    <label for="">
+                                        <h4 class="panel-title">
+                                            <input type="radio" name="radio-pago2" id="radio-pago2" disabled="" />&nbsp;
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" onclick="radios(2)">
+                                                <b>Pago con PayPal</b>
+                                                <img th:src="@{resources/imagenes/mas/paypal.png}" alt="" height="40" width="40" id="pago" />
+                                            </a>
+                                        </h4>
+                                    </label>
+                                </div>
+                                <div id="collapse3" class="panel-collapse collapse">
+                                    <div class="panel-body">
+
+                                        <form id="paypalForm" class="form-horizontal">
+                                            <!-- Text input-->
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label">Correo electrónico</label>
+                                                <div class="col-md-7 inputGroupContainer">
+                                                    <div class="input-group">
+                                                        <input name="emailPaypal" class="form-control"  type="text" placeholder="tu@email.com" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Text input-->
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label">Contraseña</label>
+                                                <div class="col-md-7 inputGroupContainer">
+                                                    <div class="input-group">
+                                                        <input name="passwordPaypal" class="form-control"  type="password" placeholder="************" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Button -->
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label"></label>
+                                                <div class="col-md-10">
+                                                    <button type="submit" class="btn btn-warning" style="background-color: #ff6666" id="validacion" value="">Validar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </li>
+
+                <br></br>
+                <li class="row list-inline columnCaptions">
+                    <span class="itemName">Subtotal:</span>
+                    <span class="price"><span id="subtotal" th:text="${subtotal}">1694.43</span>$</span><br></br><br></br>
+                    <span class="itemName">IVA<span id="iva-porciento"></span></span>
+                    <span class="price">$ <span id="iva">123.45</span></span><br></br><br></br>
+                    <span class="itemName">Descuento:</span>
+                    <span class="price"><span id="descuento"></span>$</span><br></br><br></br>
+                    <span class="itemName">Gastos de envio:</span>
+                    <span class="price"><span id="envio"></span>$</span>
+                    <br></br><br></br><br></br><br></br>
+                    <hr></hr>
+
+                    <span class="itemName">Total:</span>
+                    <span class="price"><span id="total"></span>$</span><br></br><br></br>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- INFORMACIÓN DE ENVÍO -->
+    <center>
+        <div id="cuerpo">
+            <div class="container" style="width: 100%;">
+                <form class="well form-horizontal" action="/proceso-pago" method="post"  id="shipping-form">
+                    <fieldset>
+                        <!-- Form Name -->
+                        <legend>Formulario de Envío</legend>
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Dirección</label>
+                            <div class="col-md-10 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input name="address" placeholder="Sierra Nevada #12, Fraccionamiento Las Rosas" class="form-control"  type="text" />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Ciudad</label>
+                            <div class="col-md-10 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input name="city" placeholder="Aguascalientes" class="form-control"  type="text" />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Código postal</label>
+                            <div class="col-md-10 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input name="postal" placeholder="20000" class="form-control"  type="text" />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Select Basic -->
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">País</label>
+                            <div class="col-md-10 selectContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                    <select name="country" id="country" class="form-control selectpicker" onchange="calculos()">
+                                        <option>México</option>
+                                        <option>Argentina</option>
+                                        <option>Chile</option>
+                                        <option>Guatemala</option>
+                                        <option>Venezuela</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Telefono de contacto</label>
+                            <div class="col-md-10 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input name="phone" placeholder="+52 123 456789" class="form-control"  type="text" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Button -->
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <button type="submit" onclick="return validacionGral()" class="btn btn-warning" style="background-color: #ff6666">FINALIZAR</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <input type="hidden" name="iva" id="hiddenIva" />
+                    <input type="hidden" name="cuponFinal" id="cuponFinal" />
+                    <input type="hidden" name="gastosenvio" id="gastosenvio" />
+                    <input type="hidden" name="totalFinal" id="totalFinal" />
+                </form>
+            </div>
+        </div>
+    </center>
+</div><!-- Page Content -->
+
+
+<div th:replace="fragments/navHeader :: footer">&nbsp;</div>
+<script th:src="@{js/jquery.js}"></script>
+<script th:src="@{js/bootstrap.min.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
+<script th:src="@{js/shipping-form.js}"></script>
+<script th:src="@{js/credit-card-form.js}"></script>
+<script th:src="@{js/paypal-form.js}"></script>
+<script th:src="@{js/calculations.js}"></script>
+</body>
+
+</html>

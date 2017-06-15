@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content=""/>
+
+    <title>CompuCom - Página principal</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link th:href="@{css/shop-homepage.css}" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css?family=Quicksand|Roboto" rel="stylesheet" />
+    <link rel="shortcut icon" th:href="@{resources/imagenes/Logotipos/logo.ico}" />
+    <link rel="stylesheet" th:href="@{css/style.css}" />
+    <link rel="stylesheet" th:href="@{css/hover.css}" />
+</head>
+
+<body th:style="'font-family: \'' + ${font} + '\';background-color:' + ${color} + ';'">
+<div th:replace="fragments/navHeader :: navHeader">&nbsp;</div>
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <p class="lead">
+                <br></br>
+                <a href="/">
+                    <img id="title-correction" th:src="@{resources/imagenes/Logotipos/Logomakr_3SdEHD.png}" alt="" height="60" width="300"/> <br></br>
+                    <img th:src="@{resources/imagenes/Logotipos/lema.png}" alt="" height="15" width="200" />
+                </a>
+                <br></br>
+                <br></br>
+                Categorias</p>
+            <div th:replace="fragments/navHeader :: categorias"></div>
+
+        </div>
+
+        <div class="col-md-9">
+
+            <div class="row carousel-holder">
+                <div class="col-md-12">
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img class="slide-image" th:src="@{resources/imagenes/cupon1.png}" alt="" />
+                            </div>
+                            <div class="item">
+                                <img class="slide-image" th:src="@{resources/imagenes/cupon2.png}" alt="" />
+                            </div>
+                            <div class="item">
+                                <img class="slide-image" th:src="@{resources/imagenes/cupon3.png}" alt="" />
+                            </div>
+                        </div>
+                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <h1 th:if="${categoria == null}">Productos en Oferta</h1>
+            <h1 th:if="${categoria != null}" th:text="${categoria}"></h1>
+            <div th:if="${productosOferta != null}" class="row">
+                <div th:each="prod : ${productosOferta}" class="col-sm-6 col-lg-6 col-md-6">
+                    <div class="thumbnail">
+                        <img th:src="@{'data:image/jpeg;base64,' + ${prod.imagen}}" th:alt="${prod.nombre}" id="recuadros" class="hvr-bounce-in"/>
+                        <div class="caption">
+                            <h4 class="pull-right" th:text="'$' + ${prod.precio}">$3,299.00</h4>
+                            <h4><a th:href="@{'/productoDescuento?id=' + ${prod.idproducto}}" th:text="${prod.nombre}">SEAGATE - 2TB, DORADO</a></h4>
+                            <p th:text="${prod.descripcion}">El disco duro portátil Ultraslim de Seagate de 2 TB es compacto e ideal para llevarlo a todas partes. Podrás guardar juegos, películas y música gracias a la transferencia de datos de alta velocidad. Seagate te garantiza un rendimiento eficiente para el uso con el dispositivo móvil o un ordenador . La unidad recibe alimentación del cable USB de manera que no es necesario tener una fuente de alimentación externa. Conecta y usa tu disco a gran velocidad gracias a la conectividad 2.0 y USB 3.0.</p>
+                        </div>
+                        <div class="ratings">
+                            <p class="pull-right">15 reviews</p>
+                            <p>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div th:if="${productosCategoria != null}" class="row">
+                <div th:each="prod : ${productosCategoria}" class="col-sm-6 col-lg-6 col-md-6">
+                    <div class="thumbnail">
+                        <img th:src="@{'data:image/jpeg;base64,' + ${prod.imagen}}" th:alt="${prod.nombre}" id="recuadros" class="hvr-bounce-in"/>
+                        <div class="caption">
+                            <h4 class="pull-right" th:text="'$' + ${prod.precio}">$3,299.00</h4>
+                            <h4><a th:href="@{'/producto?id=' + ${prod.idproducto}}" th:text="${prod.nombre}">SEAGATE - 2TB, DORADO</a></h4>
+                            <p th:text="${prod.descripcion}">El disco duro portátil Ultraslim de Seagate de 2 TB es compacto e ideal para llevarlo a todas partes. Podrás guardar juegos, películas y música gracias a la transferencia de datos de alta velocidad. Seagate te garantiza un rendimiento eficiente para el uso con el dispositivo móvil o un ordenador . La unidad recibe alimentación del cable USB de manera que no es necesario tener una fuente de alimentación externa. Conecta y usa tu disco a gran velocidad gracias a la conectividad 2.0 y USB 3.0.</p>
+                        </div>
+                        <div class="ratings">
+                            <p class="pull-right">15 reviews</p>
+                            <p>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/navHeader :: footer">&nbsp;</div>
+<center>
+    <img src="http://www.cerotec.net/contador.php?t=2&amp;s=2&amp;i=90400" alt="Contador de visitas y estadísticas" /><br></br>Visitas
+
+</center>
+<script th:src="@{js/jquery.js}"></script>
+<script th:src="@{js/bootstrap.min.js}"></script>
+</body>
+</html>

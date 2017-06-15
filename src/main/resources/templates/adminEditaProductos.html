@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>SB Admin - Bootstrap Admin Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/sb-admin.css}" />
+    <link th:href="@{/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <div th:replace="fragments/headers :: headerAdministracion">&nbsp;</div>
+
+    <div id="page-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Edita <small>Producto</small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li>
+                            <i class="fa fa-dashboard"></i>  <a href="/admin">Dashboard</a>
+                        </li>
+                        <li class="active">
+                            <i class="fa fa-desktop"></i> Productos
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-md-offser-2">
+                    <form method="post" enctype="multipart/form-data" action="/edit-product">
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" th:value="${producto.nombre}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion">Descripcion</label>
+                            <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" th:value="${producto.descripcion}"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="categoria">Categoria</label>
+                            <input type="text" class="form-control" id="categoria" name="categoria" placeholder="Categoria" th:value="${producto.categoria}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="existencia">Existencia</label>
+                            <input type="number" class="form-control" id="existencia" name="existencia" placeholder="Existencia" th:value="${producto.existencia}"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="precio">Precio</label>
+                            <input type="number" class="form-control" id="precio" name="precio" placeholder="Precio"  step="any" th:value="${producto.precio}"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="imagen">File input</label>
+                            <input type="file" id="imagen" name="imagen"/>
+                            <p class="help-block">Imagen del producto only jpg</p>
+                        </div>
+                        <input type="hidden" name="id" th:value="${producto.idproducto}" />
+                        <button type="submit" class="btn btn-default">Guardar</button>
+                    </form>
+                </div>
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+
+</body>
+
+</html>

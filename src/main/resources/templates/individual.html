@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content=""/>
+    <title th:text="${'CompuCom - ' + producto.nombre}">CompuCom - Página principal</title>
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{css/shop-homepage.css}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Quicksand|Roboto" rel="stylesheet" />
+    <link rel="shortcut icon" th:href="@{resources/imagenes/Logotipos/logo.ico}" />
+    <link rel="stylesheet" th:href="@{css/style.css}" />
+    <link rel="stylesheet" th:href="@{css/hover.css}" />
+</head>
+
+<body>
+    <div th:replace="fragments/navHeader :: navHeader">&nbsp;</div>
+    <div th:if="${noexistencia == 'noexistencia'}">
+        <script type="text/javascript">
+            alert("Producto Agotado");
+        </script>
+    </div>
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <p class="lead">
+                    <br></br>
+                    <a href="/">
+                        <img id="title-correction" th:src="@{resources/imagenes/Logotipos/Logomakr_3SdEHD.png}" alt="" height="60" width="300"/> <br></br>
+                        <img th:src="@{resources/imagenes/Logotipos/lema.png}" alt="" height="15" width="200" />
+                    </a>
+                    <br></br>
+                    <br></br>
+                    Categorias
+                </p>
+                <div th:replace="fragments/navHeader :: categorias"></div>
+            </div>
+            <div th:if="${itemadd == 'itemadd'}" class="col-md-5">
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Aviso!</strong> Producto agregado al carrito.
+                </div>
+            </div>
+            <div th:if="${descuento == 'descuento'}" class="col-md-5">
+                <div class="alert alert-info alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Aviso!</strong> Producto con descuento.
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h1 th:text="${producto.categoria}">NOMBRE DE LA CATEGORIA</h1>
+                <div class="thumbnail">
+                    <img class="img-responsive hvr-bounce-in" th:src="@{'data:image/jpeg;base64,' + ${producto.imagen}}" th:alt="${producto.nombre}" id="presentacion"/>
+                    <div class="caption-full">
+                        <h4 th:if="${descuento == 'descuento'}" class="pull-right" th:text="${producto.precio + ' - 10%'}">$3,299.00</h4>
+                        <h4 th:if="${descuento == null}" class="pull-right" th:text="${producto.precio}">$3,299.00</h4>
+                        <h4><a href="#" th:text="${producto.nombre}">SEAGATE - 2TB, DORADO</a></h4>
+                        <p th:text="${producto.descripcion}">
+                            El disco duro portátil Ultraslim de Seagate de 2 TB es compacto e ideal para llevarlo a todas partes. Podrás guardar juegos, películas y música gracias a la transferencia de datos de alta velocidad. Seagate te garantiza un rendimiento eficiente para el uso con el dispositivo móvil o un ordenador . La unidad recibe alimentación del cable USB de manera que no es necesario tener una fuente de alimentación externa. Conecta y usa tu disco a gran velocidad gracias a la conectividad 2.0 y USB 3.0.
+                        </p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <a th:if="${descuento == null}" th:href="@{'/additem?id=' + ${producto.idproducto} + '&amp;test=false'}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Agregar al carrito</a>
+                    <a th:if="${descuento == 'descuento'}" th:href="@{'/additem?id=' + ${producto.idproducto} + '&amp;test=true'}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="fragments/navHeader :: footer">&nbsp;</div>
+    <script th:src="@{js/jquery.js}"></script>
+    <script th:src="@{js/bootstrap.min.js}"></script>
+</body>
+</html>

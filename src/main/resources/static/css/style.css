@@ -1,0 +1,71 @@
+body{
+	font-family: 'Roboto';
+}
+
+#title-correction{
+	margin-top: -0.70em;
+}
+
+#correction{
+	margin-top: 0.70em;
+}
+
+#inicio-sesion{
+	margin-left: 18em;
+}
+
+/*	---- NOSOTROS.html ----	*/
+
+#cuerpo{
+	text-align: justify;
+	border: #e6e6e6 1px solid;
+	color: black;
+	width: 75%;
+	padding: 2em;
+	
+}
+
+#cuerpo > p{
+	margin-left: 3em;
+}
+
+#cuerpo > ul{
+	list-style-type: square;
+}
+
+/*	---- CONTACTO.html ---- */
+
+#cuerpo > p > ins {
+	color:blue;
+}
+
+#cuerpo > p > b {
+	color:#993333;
+}
+
+/*	Links azul */
+
+.link{
+	color:blue;
+}
+
+/* Imagenes del index (Productos) */
+
+#recuadros{
+	width: 200px;
+	height: 220px;
+}
+
+
+/*	Imagenes individuales del producto */
+
+#presentacion{
+	width: 250px;
+	height: 300px;
+}
+
+/*	Metodos de pago */
+
+#pago{
+	margin-left: 10em;
+}

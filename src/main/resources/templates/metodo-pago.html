@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content=""/>
+    <title>CompuCom - Pago</title>
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{css/shop-homepage.css}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Quicksand|Roboto" rel="stylesheet" />
+    <link rel="shortcut icon" th:href="@{resources/imagenes/Logotipos/logo.ico}" />
+    <link rel="stylesheet" th:href="@{css/style.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/shopping-cart.css}"/>
+</head>
+<body onload="calculos()">
+    <div th:replace="fragments/navHeader :: navHeader">&nbsp;</div>
+    <div id="shopping-area">
+      <div class="container-fluid breadcrumbBox text-center">
+        <ol class="breadcrumb">
+          <li><a href="/">Selección</a></li>
+          <li><a href="/carrito">Verificación</a></li>
+          <li class="active"><a href="#">Pago</a></li>
+        </ol>
+      </div>
+      
+      <div class="container text-center">
+
+        <div class="col-md-5 col-sm-12">
+          <div class="bigcart"></div>
+          <h1>Forma de pago</h1>
+          <p>
+            Elige la forma de pago que más te acomode. <br></br>
+            Y por favor rellene el formulario de envío que tenemos abajo.<br></br>
+            [Cupones: feliz navidad, cumpleaños, buenas vacaciones]
+          </p><br></br>
+        Cupon de descuento: <input type="text" name="cupon" id="cupon" onkeyup="calculos()" />
+        </div>
+
+
+        <div class="col-sm-6 col-lg-6 col-md-6 text-left">
+          <ul>
+            <li>
+              <div class="panel-group" id="accordion">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                          <label for="">
+                      <h4 class="panel-title">
+                          <input type="radio" name="radio-pago" id="radio-pago" />&nbsp;
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                          <b>Tarjeta de crédito</b>
+                          <img th:src="@{resources/imagenes/mas/visa.png}" alt="" height="40" width="40" id="pago" />
+                          <img th:src="@{resources/imagenes/mas/master-card.png}" alt="" height="40" width="40" />
+                          <img th:src="@{resources/imagenes/mas/amex.png}" alt="" height="40" width="40" />
+                        </a>
+                      </h4>
+                        </label>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse">
+                      <div class="panel-body">Adquirir productos o servicios desde tu computadora cómoda, fácil y rápidamente con sólo hacer algunos clics, puedes encontrar información más detallada sobre los artículos de tu interés y realizar comparativos sobre las características de estos.</div>
+                    </div>
+                  </div>
+
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <label for="">
+                      <h4 class="panel-title">
+                          <input type="radio" name="radio-pago" id="radio-pago" />&nbsp;
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" >
+                          <b>Pago con PayPal</b>
+                          <img th:src="@{resources/imagenes/mas/paypal.png}" alt="" height="40" width="40" id="pago" />
+                        </a>
+                      </h4>
+                      </label>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                      <div class="panel-body">Es muy sencillo.
+                    </div>
+                  </div>
+                </div> 
+              </div> 
+            </li>
+  
+            <br></br>
+            <li class="row list-inline columnCaptions">
+              <span class="itemName">Subtotal:</span>
+              <span class="price"><span id="subtotal" th:text="${subtotal}">1694.43</span>$</span><br></br><br></br>
+              <span class="itemName">IVA<span id="iva-porciento"></span></span>
+              <span class="price">$ <span id="iva">123.00</span></span><br></br><br></br>
+              <span class="itemName">Descuento:</span>
+              <span class="price"><span id="descuento"></span>$</span>
+                <br></br><br></br>
+                <span class="itemName">Gastos de envio:</span>
+                <span class="price"><span id="envio"></span>$</span>
+                <br></br><br></br>
+                <hr></hr>
+              <span class="itemName">Total:</span>
+              <span class="price"><span id="total"></span>$</span><br></br><br></br>
+            </li>
+          </ul>
+        </div>  
+      </div>
+
+     <!-- INFORMACIÓN DE ENVÍO -->                        
+      <center>
+      <div id="cuerpo">
+        <div class="container" style="width: 100%;">
+            <form class="well form-horizontal" action=" " method="post"  id="shipping-form">
+              <fieldset>
+                <!-- Form Name -->
+                <legend>Formulario de Envío</legend>
+                <!-- Text input-->
+                <div class="form-group">
+                  <label class="col-md-2 control-label">Dirección</label> 
+                  <div class="col-md-10 inputGroupContainer">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                      <input name="address" placeholder="Sierra Nevada #12, Fraccionamiento Las Rosas" class="form-control"  type="text" />
+                    </div>
+                  </div>
+                </div>
+                <!-- Text input-->
+                <div class="form-group">
+                  <label class="col-md-2 control-label">Ciudad</label> 
+                  <div class="col-md-10 inputGroupContainer">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                      <input name="city" placeholder="Aguascalientes" class="form-control"  type="text" />
+                    </div>
+                  </div>
+                </div>
+                <!-- Text input-->
+                <div class="form-group">
+                  <label class="col-md-2 control-label">Código postal</label> 
+                  <div class="col-md-10 inputGroupContainer">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                      <input name="postal" placeholder="20000" class="form-control"  type="text" />
+                    </div>
+                  </div>
+                </div>
+                 <!-- Select Basic -->                   
+                <div class="form-group"> 
+                  <label class="col-md-2 control-label">País</label>
+                  <div class="col-md-10 selectContainer">
+                    <div class="input-group">
+                       <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                       <select name="country" id="country" class="form-control selectpicker" onchange="calculos()">
+                          <option>México</option>
+                          <option>Argentina</option>
+                          <option>Chile</option>
+                          <option>Guatemala</option>
+                          <option>Venezuela</option>
+                        </select>
+                    </div>
+                  </div>
+                </div> 
+                <!-- Text input-->
+                <div class="form-group">
+                  <label class="col-md-2 control-label">Telefono de contacto</label> 
+                  <div class="col-md-10 inputGroupContainer">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                      <input name="phone" placeholder="+52 123 456789" class="form-control"  type="text" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Button -->
+                <div class="form-group">
+                  <label class="col-md-2 control-label"></label>
+                     <div class="col-md-10">
+                       <button type="submit" class="btn btn-warning" style="background-color: #ff6666">FINALIZAR</button>
+                     </div>
+                </div>
+              </fieldset>
+           </form>
+        </div>
+      </div>
+      </center>
+    </div><!-- Page Content -->
+
+    <div th:replace="fragments/navHeader :: footer">&nbsp;</div>
+    <script th:src="@{js/jquery.js}"></script>
+    <script th:src="@{js/bootstrap.min.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
+    <script th:src="@{js/shipping-form.js}"></script>
+    <script th:src="@{js/calculations.js}"></script>
+</body>
+
+</html>

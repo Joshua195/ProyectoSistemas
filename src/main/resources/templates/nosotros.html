@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content=""/>
+
+    <title>CompuCom - Nosotros</title>
+
+    <!-- Bootstrap Core CSS -->
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link th:href="@{css/shop-homepage.css}" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css?family=Quicksand|Roboto" rel="stylesheet" />
+    <link rel="shortcut icon" th:href="@{resources/imagenes/Logotipos/logo.ico}" />
+    <link rel="stylesheet" th:href="@{css/style.css}" />
+</head>
+
+<body>
+    <div th:replace="fragments/navHeader :: navHeader">&nbsp;</div>
+    <div>
+        <center>
+            <a href="/"><img th:src="@{resources/imagenes/Logotipos/Logomakr_19IOno.png}" alt="" height="110" width="300" /><br></br>
+            <img th:src="@{resources/imagenes/Logotipos/lema.png}" alt="" height="30" width="400" /></a>
+        </center>
+        <br></br>
+        <br></br>
+    <center>
+    <div id="cuerpo">          
+            <h2>Acerca de: </h2>
+            <p>
+                CompuCom es una empresa nueva con localización en Aguascalientes, con menos de un año pero con experiencia y conocimiento en el nuestra área, nos dedicamos a la venta de artículos de cómputo y tecnología. Con un catálogo en crecimiento y con marcas mundialmente reconocidas. Tenemos presencia en Av Aguascalientes Nte 503, Calicantos I, 20130 Aguascalientes, Ags.
+            </p>
+        <br></br>
+            <center>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d462.68509045653525!2d-102.304251!3d21.9160633!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2smx!4v1481504397675" width="600" height="450" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+            </center>
+        <br></br>
+
+            <h2>Misión: </h2>
+            <p>
+                proporcionar a nuestros clientes los productos de más alta calidad, satisfaciendo las necesidades tecnológicas del mercado Hidrocálido, trayendo siempre las últimas novedades en Tecnología.
+            </p>
+            <h2>Visión: </h2>  
+            <p>
+                establecernos como empresa tecnológica líder en el mercado local, expandiendo nuestra comercialización en todos los mercados posibles, para situarnos como una de las mejores empresas de calidad y rápido crecimiento.
+            </p>
+            <h2>Objetivo general: </h2>
+            <p>
+                ampliar y atender la demanda de productos tecnológicos bajo criterios y estándares de calidad con especial atención al mercado de la Ciudad de Aguascalientes.
+            </p>
+            <h2>Objetivo organizacionales: </h2>
+            <p>
+                <ul>
+                    <li>Ser conocidos como una empresa de primera elección.</li>
+                    <li>Nos asociamos con los mejores proveedores del mundo, fortaleciendo la calidad de los productos.</li>
+                    <li>Demostrar continuamente nuestro compromiso hacia un trato digno y responsable con nuestros clientes.</li>
+                    <li>Asegurar la posición competitiva del mercado de Aguascalientes.</li>
+                    <li>Establecer continuamente las normas más altas de satisfacción del cliente en nuestra industria, a través de productos innovadores.</li>
+                    <li>Estar siempre a la vanguardia tecnológica. </li>
+                </ul>
+            </p>
+            <h2>Qué te ofrecemos: </h2>
+            <p>
+                <ul>
+                    <li>Un catálogo de productos de la más alta calidad. Todo lo puedes ver desde nuestra página Web, con precio y existencias en precio real. </li>
+                    <li>Diferentes formas de pago para que elijas la que más te acomode! Además, podemos enviar tu compra directo a tu domicilio. </li>
+                </ul>
+            </p>
+            <p> 
+                <center>
+                    <img th:src="@{resources/imagenes/marcas/acer.png}" alt="" height="35" width="140" />
+                    <img th:src="@{resources/imagenes/marcas/samsung.png}" alt="" height="35" width="180" />
+                    <img th:src="@{resources/imagenes/marcas/logitech.jpg}" alt="" height="60" width="120" />
+                    <img th:src="@{resources/imagenes/marcas/corsair.png}" alt="" height="35" width="120" />
+                    <img th:src="@{resources/imagenes/marcas/mac.png}" alt="" height="45" width="45" />
+                    <img th:src="@{resources/imagenes/marcas/adata.png}" alt="" height="50" width="100" />
+                </center>
+            </p>
+        </div>
+    </center>
+    </div>
+
+    <div th:replace="fragments/navHeader :: footer">&nbsp;</div>
+    <script th:src="@{js/jquery.js}"></script>
+    <script th:src="@{js/bootstrap.min.js}"></script>
+</body>
+</html>

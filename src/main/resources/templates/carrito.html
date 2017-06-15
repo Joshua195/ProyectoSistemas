@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content=""/>
+    <title>CompuCom - Carrito</title>
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{css/shop-homepage.css}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Quicksand|Roboto" rel="stylesheet" />
+    <link rel="shortcut icon" th:href="@{resources/imagenes/Logotipos/logo.ico}" />
+    <link rel="stylesheet" th:href="@{css/style.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/shopping-cart.css}"/>
+</head>
+<body>
+    <div th:replace="fragments/navHeader :: navHeader">&nbsp;</div>
+    <div id="shopping-area">
+      <div class="container-fluid breadcrumbBox text-center">
+        <ol class="breadcrumb">
+          <li><a href="/">Selección</a></li>
+          <li class="active"><a href="#">Verificación</a></li>
+          <li><a href="#">Pago</a></li>
+        </ol>
+      </div>
+      
+      <div class="container text-center">
+
+        <div class="col-md-5 col-sm-12">
+          <div class="bigcart"></div>
+          <h1>Tú carrito de compra</h1>
+          <p>Para tener una buena experiencia de compra, te pedimos que verifiques los productos escojidos. De tener productos de más, por favor eliminalos. <br></br>Para añadir más productos, puedes volver a seleccionar, tu carrito se mantendrá :)</p>
+        </div>
+        
+        <div class="col-md-7 col-sm-12 text-left">
+          <ul>
+            <li class="row list-inline columnCaptions">
+              <span>CANTIDAD</span>
+              <span>PRODUCTO</span>
+              <span>PRECIO UNITARIO</span>
+            </li>
+
+            <!-- PRODUCTOS -->
+
+            <li th:each="item : ${items}" class="row">
+              <span class="quantity" th:text="${item.cantidad}">1</span>
+              <span class="itemName" th:text="${item.nombre}">Bolillo</span>
+              <span class="popbtn"><a th:href="@{'/deleteitem?id=' + ${item.idproducto}}" class="glyphicon glyphicon-remove"></a></span>
+              <span th:if="${item.descuento == false}" class="price" th:text="${'$' + item.precio}">$1</span>
+                <span th:if="${item.descuento == true}" class="price" th:text="${'$' + item.precio + ' - 10%'}">$1</span>
+            </li>
+
+            <!-- /.PRODUCTOS -->
+
+            <li class="row totals">
+                <span class="itemName">Subtotal:</span>
+                <span class="price" th:text="${'$' + total}" id="puto">$0.0</span>
+                <span th:if="${total != '0.0'}" class="order" id="pagarButton"> <a href="/proceso-compra" class="text-center" onclick="return correccion()">IR AL PAGO</a></span>            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div th:replace="fragments/navHeader :: footer">&nbsp;</div>
+    <script th:src="@{js/jquery.js}"></script>
+    <script th:src="@{js/bootstrap.min.js}"></script>
+    <script th:inline="javascript">
+        function correccion() {
+            /*<![CDATA[*/
+            var total = /*[[${total}]]*/ null;
+            if (total == "0.0"){
+                alert("Seleccione productos para continuar");
+                return false;
+            }
+            return true;
+            /*]]>*/
+        }
+    </script>
+</body>
+
+</html>

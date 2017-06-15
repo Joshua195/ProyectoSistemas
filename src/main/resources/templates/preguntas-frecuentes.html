@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>CompuCom - Preguntas frecuentes</title>
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{css/shop-homepage.css}" rel="stylesheet" /><link href="https://fonts.googleapis.com/css?family=Quicksand|Roboto" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Quicksand|Roboto" rel="stylesheet" />
+    <link rel="shortcut icon" th:href="@{resources/imagenes/Logotipos/logo.ico}" />
+    <link rel="stylesheet" th:href="@{css/style.css}" />
+</head>
+
+<body>
+    <div th:replace="fragments/navHeader :: navHeader">&nbsp;</div>
+    <!-- Page Content -->
+    <div>
+        <center>
+            <a href="/"><img th:src="@{resources/imagenes/Logotipos/Logomakr_19IOno.png}" alt="" height="110" width="300" /><br></br>
+            <img th:src="@{resources/imagenes/Logotipos/lema.png}" alt="" height="30" width="400" /></a>
+        </center>
+        <br></br>
+        <br></br>
+        <div class="container">
+            <h2>Preguntas frecuentes</h2>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><b>¿Qué es una compra por Internet?</b></a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse">
+                        <div class="panel-body">Adquirir productos o servicios desde tu computadora cómoda, fácil y rápidamente con sólo hacer algunos clics, puedes encontrar información más detallada sobre los artículos de tu interés y realizar comparativos sobre las características de estos.</div>
+                    </div>
+                </div>
+
+                <!--<div class="panel panel-default">-->
+                    <!--<div class="panel-heading">-->
+                        <!--<h4 class="panel-title">-->
+                            <!--<a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><b>¿Qué debo hacer para comprar en la página de CompuCOM?</b></a>-->
+                        <!--</h4>-->
+                    <!--</div>-->
+                    <!--<div id="collapse2" class="panel-collapse collapse">-->
+                        <!--<div class="panel-body">-->
+                            <!--Para realizar compras en <b>compucom.com.mx</b>, deberás registrarte ingresando a la página <b>Registrate</b> que aparece en la parte superior derecha de la página. Una vez realizado el registro podrás seleccionar todos los productos que desees adquirir y agregarlos al carrito de compras, al concluir tu selección, sólo debes dar clic en <b>Concluir mi pedido</b> y seguir estos sencillos pasos: </br></br>-->
+                        <!--</div>-->
+                        <!--<div>-->
+                            <!--<ol>-->
+                                <!--<li><b>Envío. </b> Elige la dirección de envío de tú pedido.</li>-->
+                                <!--<li><b>Pago. </b> Selecciona la forma de pago.</li>-->
+                                <!--<li><b>Revisar. </b>Verifica toda la información del pedido.</li>-->
+                                <!--<li><b>Terminar. </b>Concluye la compra.</li>-->
+                            <!--</ol>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><b>¿Cómo me registro como Cliente?</b></a>
+                        </h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                        <div class="panel-body">Es muy sencillo, sólo da clic a la opción Crear nueva cuenta que aparece en la parte superior derecha de la página, llena la información correctamente y ya estás listo para comprar en línea. Si tienes alguna duda sobre el registro, llámanos desde el Aguascalientes y alrededores <b>(044) 449-123-4567</b> y desde el interior de la republica <b>(01 800) 987 65 43 de lunes a viernes de 9:00 a 20:00 horas</b>, o envíanos un correo electrónico a <ins class="link">compucom_ventas@gmail.com.mx</ins>, aquí te daremos toda la información necesaria y recibirás apoyo para agilizar tu registro.</div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4"><b>¿Para qué sirve mi nombre de usuario y contraseña?</b></a>
+                        </h4>
+                    </div>
+                    <div id="collapse4" class="panel-collapse collapse">
+                        <div class="panel-body">Con tu nombre de usuario y contraseña puedes ingresar a tu cuenta de Cliente, en la página de registro, en la sección <b>Mi cuenta</b> con el botón de <b>Entrar</b> debes escribirlos como los hayas registrado, ya que el sistema reconoce mayúsculas, minúsculas, números y signos. Con tú cuenta de Cliente podrás realizar compras vía internet.</div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse5"><b>¿Cómo realizan la entrega de productos?</b></a>
+                        </h4>
+                    </div>
+                    <div id="collapse5" class="panel-collapse collapse">
+                        <div class="panel-body">En general nuestros productos tienen un tiempo de entrega máximo de 10 días hábiles, siempre y cuando no se presente ningún inconveniente con la forma de pago y la disponibilidad de los artículos. En la zona metropolitana el envío no tiene costo alguno y la entrega se realiza por transporte CompuCom. Los envíos al interior de la Republica Mexicana se hacen por mensajería DHL con un cargo adicional (verificar costo de envío).</div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse6"><b>¿Cómo sé si realice correctamente mi compra?</b></a>
+                        </h4>
+                    </div>
+                    <div id="collapse6" class="panel-collapse collapse">
+                        <div class="panel-body">Se te enviará un email de confirmación con información acerca de tú pedido, éste servirá como comprobante de compra para cualquier queja o aclaración.</div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse7"><b>¿Cómo puedo hacer el cambio o devolución de un producto que compré?</b></a>
+                        </h4>
+                    </div>
+                    <div id="collapse7" class="panel-collapse collapse">
+                        <div class="panel-body">Es necesario mandar un email a <ins class="link">compucom_ventas@gmail.com.mx</ins> con una foto de tu ticket o comprobante de compra y con la descripción del problema con el producto.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragments/navHeader :: footer">&nbsp;</div>
+    <script th:src="@{js/jquery.js}"></script>
+    <script th:src="@{js/bootstrap.min.js}"></script>
+</body>
+
+</html>

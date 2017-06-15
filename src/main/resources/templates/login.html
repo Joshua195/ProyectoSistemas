@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>CompuCom - Inicio de sesión</title>
+    <link rel="shortcut icon" th:href="@{/resources/imagenes/Logotipos/logo.ico}" />
+    <link rel="stylesheet" th:href="@{/css/log-in.css}" />
+</head>
+<body>
+    <div id="contenedor">
+    <div>
+        <div th:if="${password == 'fail'}">
+            <script type="text/javascript">
+                alert("Usuario o contraseña incorrectos!!");
+            </script>
+        </div>
+        <div th:if="${nologin == 'nologin'}">
+            <script type="text/javascript">
+                alert("Iniciar Sesion");
+            </script>
+        </div>
+        <div th:if="${capchaError == 'capchaError'}">
+            <script type="text/javascript">
+                alert("Capcha Incorrecto");
+            </script>
+        </div>
+        <a href="/">
+            <center>
+                <img th:src="@{resources/imagenes/Logotipos/Logomakr_19IOno.png}" alt="" height="80" width="200"/>
+                <br></br>
+                <img th:src="@{resources/imagenes/Logotipos/lema.png}" alt="" height="20" width="320"/>
+            </center>
+        </a>
+    </div>
+        <form action="/check-user" method="post">
+            <div class='login'>
+              <h2>Sign in</h2>
+              <input name='username' placeholder='Username' type='text' required="" th:value="${username}"/>
+              <input id='pw' name='password' placeholder='Password' type='password' required="" />
+                <center>
+                    <br></br>
+                    <img th:src="@{'/capcha/' + ${capcha} + '.png'}" th:value="${capcha}"  name="noCapcha"/>
+                </center>
+                <input type="text" name="capcha" placeholder="Ingrese capcha" required=""/>
+              <div class='remember'>
+                <input checked='' id='remember' name='remember' type='checkbox'/>
+                <label for='remember'></label>Remember me
+              </div>
+              <input type='submit' onclick="b" value='Sign in'/>
+              <a class='forgot' href='/forgotPassword'>Forgot your password?</a>
+                <div>
+                    <br></br>
+                    <center>
+                        Color fondo: &nbsp;
+                        <select name="color" id="" style="width: 100px; border-radius: 5px; font-family: 'Sans-serif'; background-color: #d9d9d9;">
+                            <option value="#ffffff" style="background-color: #ffffff;">Blanco</option>
+                            <option value="#d9d9d9" style="background-color: #d9d9d9;">Gris</option>
+                            <option value="#cce0ff" style="background-color: #cce0ff;">Azul</option>
+                        </select>
+                        <br></br>
+                        Tipo de fuente: &nbsp;
+                        <select name="font" id="" style="width: 100px; border-radius: 5px; font-family: 'Sans-serif'; background-color: #d9d9d9;">
+                            <option value="Sans-serif" style="font-family: 'Sans-serif';">Sans-serif</option>
+                            <option value="Roboto" style="font-family: 'Roboto';">Roboto</option>
+                            <option value="Arial" style="font-family: 'Arial';">Arial</option>
+                        </select>
+                    </center>
+                </div>
+            </div>
+        </form>
+    </div>
+
+<!-- jQuery -->
+    <script th:src="@{js/jquery.js}"></script>
+    <script th:src="@{js/log-in.js}"></script>
+
+</body>
+</html>

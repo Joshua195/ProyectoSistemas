@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>CompuCom - contacto</title>
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{css/shop-homepage.css}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Quicksand|Roboto" rel="stylesheet" />
+    <link rel="shortcut icon" th:href="@{resources/imagenes/Logotipos/logo.ico}" />
+    <link rel="stylesheet" th:href="@{css/style.css}" />
+    <link rel="stylesheet" th:href="@{css/form.css}" />
+</head>
+
+<body>
+
+    <div th:replace="fragments/navHeader :: navHeader">&nbsp;</div>
+    <!-- Page Content -->
+    <div>
+        <center>
+            <a href="/"><img th:src="@{resources/imagenes/Logotipos/Logomakr_19IOno.png}" alt="" height="110" width="300" /><br></br>
+                <img th:src="@{resources/imagenes/Logotipos/lema.png}" alt="" height="30" width="400" /></a>
+        </center>
+        <br></br>
+        <br></br>
+    <center>
+    <div id="cuerpo">          
+        <h2>Contáctanos</h2>
+        <p>
+            Para más información favor de contactarnos:
+            <p>
+                <b>Correo electrónico:  </b><ins>compu.com.ags@gmail.com</ins><br></br>
+                <b>Teléfono: </b> (044) 449 123 4567, 01 800 987 65 43<br></br>
+                <b>Sucursal: </b> Av Aguascalientes Nte 503, Calicantos I, 20130 Aguascalientes, Ags.<br></br>
+                <pre style="font-family: 'Quicksand';">O bien rellena el siguiente formulario y nosotros te contactamos:<br></br></pre>
+            </p>
+        </p>
+        
+        <div class="container" style="width: 100%;">
+
+            <form class="well form-horizontal" action="/contacto" method="post"  id="contact_form">
+            <fieldset>
+
+            <!-- Form Name -->
+            <legend>Formulario de contacto</legend>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+              <label class="col-md-4 control-label" >Nombre</label> 
+                <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+              <input name="name" placeholder="Juan Perez" class="form-control"  type="text" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Text input-->
+                   <div class="form-group">
+              <label class="col-md-4 control-label">Correo Electrónico</label>  
+                <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+              <input name="email" placeholder="tu_email@dominio.com" class="form-control"  type="text" />
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Text input-->
+                   
+            <div class="form-group">
+              <label class="col-md-4 control-label">Telefono #</label>  
+                <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+              <input name="phone" placeholder="(044) 449-123-45-67" class="form-control" type="text" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Text input-->
+                  
+            <div class="form-group">
+              <label class="col-md-4 control-label">Dirección</label>  
+                <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+              <input name="address" placeholder="Fraccionamiento/Calle/#" class="form-control" type="text" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Select Basic -->
+               
+            <div class="form-group"> 
+              <label class="col-md-4 control-label">Ciudad</label>
+                <div class="col-md-4 selectContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                <select name="state" class="form-control selectpicker" >
+                    <option value=" " >Selecciona estado</option>
+                    <option>Aguascalientes</option>
+                    <option>Baja California</option>
+                    <option>Baja California Sur</option>
+                    <option>Campeche</option>
+                    <option>Chiapas</option>
+                    <option>Chihuahua</option>
+                    <option>Coahuila</option>
+                    <option>Colima</option>
+                    <option>Distrito Federal</option>
+                    <option>Durango</option>
+                    <option>Estado de México</option>
+                    <option>Guanajuato</option>
+                    <option>Guerrero</option>
+                    <option>Hidalgo</option>
+                    <option>Jalisco</option>
+                    <option>Michoacán</option>
+                    <option>Morelos</option>
+                    <option>Nayarit</option>
+                    <option>Nuevo León</option>
+                    <option>Oaxaca</option>
+                    <option>Puebla</option>
+                    <option>Querétaro</option>
+                    <option>Quintana Roo</option>
+                    <option>San Luis Potosí</option>
+                    <option>Sinaloa</option>
+                    <option>Sonora</option>
+                    <option>Tabasco</option>
+                    <option>Tamaulipas</option>
+                    <option>Tlaxcala</option>
+                    <option>Veracruz</option>
+                    <option>Yucatán</option>
+                    <option>Zacatecas</option>
+                </select>
+              </div>
+            </div>
+            </div>
+
+           <!-- Text area -->
+              
+            <div class="form-group">
+              <label class="col-md-4 control-label">Descripción</label>
+                <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                        <textarea class="form-control" name="comment" placeholder="Asunto"></textarea>
+              </div>
+              </div>
+            </div>
+
+            <!-- Success message -->
+            <div class="alert alert-success" role="alert" id="success_message">Éxito<i class="glyphicon glyphicon-thumbs-up"></i> Gracias por ponerse en contacto con nosotros, nos pondremos en contacto con usted en breve.</div>
+
+            <!-- Button -->
+            <div class="form-group">
+              <label class="col-md-4 control-label"></label>
+              <div class="col-md-4">
+                <button type="submit" class="btn btn-warning">Enviar<span class="glyphicon glyphicon-send"></span></button>
+              </div>
+            </div>
+
+            </fieldset>
+            </form>
+            </div>
+    </div><!-- /.container -->
+    </center>
+    </div>
+
+    <div th:replace="fragments/navHeader :: footer">&nbsp;</div>
+    <script th:src="@{js/jquery.js}"></script>
+    <script th:src="@{js/bootstrap.min.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
+    <script th:src="@{js/contact.js}"></script>
+</body>
+
+</html>
