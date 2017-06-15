@@ -1,8 +1,5 @@
 package com.proyecto.sistemas.model;
 
-
-import java.util.Arrays;
-
 public class Item {
 
     private Integer idproducto;
