@@ -18,6 +18,7 @@
 <div th:replace="fragments/navHeader :: navHeader">&nbsp;</div>
 <!-- Page Content -->
 <div class="container">
+    <br></br>
     <center><h1>Mi Historial</h1></center>
     <h3>#_Compra &emsp;&emsp;&emsp; Fecha &emsp;&emsp;&emsp; Importe </h3>
     <div th:each="compra,it : ${compras}" class="panel-group" id="accordion">

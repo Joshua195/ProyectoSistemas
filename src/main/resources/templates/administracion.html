@@ -33,45 +33,6 @@
                         <h1 th:text="'Welcome ' + ${user.nombre}"></h1>
                     </div>
                 </div>
-
-
-                <div class="container">
-                    <h1>Ventas realizadas</h1>
-                    <h3>#_Compra &emsp;&emsp;&emsp; Fecha &emsp;&emsp;&emsp; Importe &emsp;&emsp;
-                    #_Envio &emsp; #_Usuario</h3>
-                    <div th:each="compra,it : ${compras}" class="panel-group" id="accordion">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <div>
-                                        &emsp;&emsp;
-                                        <span th:text="'#' + ${compra.idcompra}"></span>
-                                        &ensp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                                        <span th:text="${compra.fecha}"></span>
-                                        &emsp;&emsp;&emsp;&emsp;
-                                        $<span th:text="${compra.precio}"></span>
-                                        &emsp;&emsp;&emsp;&emsp;
-                                        <span th:text="'#' + ${compra.idenvio}"></span>
-                                        &ensp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                                        <span th:text="'#' + ${compra.idusuario}"></span>
-                                        &ensp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                                        <a data-toggle="collapse" data-parent="#accordion" th:href="'#collapse' + ${it}">View Details</a>
-                                    </div>
-                                </h4>
-                            </div>
-                            <div th:id="'collapse' + ${it}" class="panel-collapse collapse">
-                                <div th:each="prod : ${productos}" class="panel-body">
-                                    <div id="cuerpo" style="border-right-width: 70px">
-                                        <b>ID Producto:  </b><span th:text="${prod.idprod}"></span><br></br>
-                                        <b>Nombre:       </b><span th:text="${prod.nombre}"></span><br></br>
-                                        <b>Precio:       </b><span th:text="'$' + ${prod.precio}"></span><br></br>
-                                    </div>  <!-- /div panel-body -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--    -->
-                </div>
             </div>
         </div>
     </div>

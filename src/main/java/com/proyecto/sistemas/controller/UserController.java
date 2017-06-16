@@ -438,7 +438,104 @@ public class UserController {
         User user = (User) request.getSession().getAttribute("user");
         List<CompraItem> comprasByUser = getComprasByUser(user.getIdusers());
         request.setAttribute("compras", comprasByUser);
+        request.setAttribute("itemscarrito", request.getSession().getAttribute("itemscarrito"));
+        request.setAttribute("user", request.getSession().getAttribute("user"));
         return "historial";
+    }
+
+    @GetMapping("/historialVentas")
+    public String historialTotal(HttpServletRequest request){
+        if(!checkSession(request)){
+            request.setAttribute("nologin" , "nologin");
+            return "redirect:/login";
+        }
+        User user = (User) request.getSession().getAttribute("user");
+        List<CompraItem> compras = getCompras();
+        request.setAttribute("compras", compras);
+        request.setAttribute("itemscarrito", request.getSession().getAttribute("itemscarrito"));
+        request.setAttribute("user", request.getSession().getAttribute("user"));
+        return "historialTotal";
+    }
+
+    @GetMapping("/usuarios")
+    public String allUsers(HttpServletRequest request){
+        if(!checkSession(request)){
+            request.setAttribute("nologin" , "nologin");
+            return "redirect:/login";
+        }
+        List<User> users = repository.findAll();
+        request.setAttribute("usuarios", users);
+        request.setAttribute("itemscarrito", request.getSession().getAttribute("itemscarrito"));
+        request.setAttribute("user", request.getSession().getAttribute("user"));
+        return "usuarios";
+    }
+
+    @GetMapping("/new-user")
+    public String newUser(HttpServletRequest request){
+        if(!checkSession(request)){
+            request.setAttribute("nologin" , "nologin");
+            return "redirect:/login";
+        }
+        request.setAttribute("itemscarrito", request.getSession().getAttribute("itemscarrito"));
+        request.setAttribute("user", request.getSession().getAttribute("user"));
+        return "usuariosNew";
+    }
+
+    @PostMapping("/add-user")
+    public String addNewUser(String username, String password, String name, String email, String role,
+                             HttpServletRequest request){
+        if(!checkSession(request)){
+            request.setAttribute("nologin" , "nologin");
+            return "redirect:/login";
+        }
+        User user = new User(username,new CryptMD5().cryptMD5(password),name,email,"",role);
+        repository.save(user);
+        request.setAttribute("itemscarrito", request.getSession().getAttribute("itemscarrito"));
+        request.setAttribute("user", request.getSession().getAttribute("user"));
+        return "redirect:/usuarios";
+    }
+
+    @GetMapping("/del-user")
+    public String delUser(Integer id, HttpServletRequest request){
+        if(!checkSession(request)){
+            request.setAttribute("nologin" , "nologin");
+            return "redirect:/login";
+        }
+        repository.delete(id);
+        HttpSession httpSession = request.getSession();
+        request.setAttribute("user", httpSession.getAttribute("user"));
+        return "redirect:/usuarios";
+    }
+
+    @GetMapping("/edit-user")
+    public String editUser(Integer id, HttpServletRequest request){
+        if(!checkSession(request)){
+            request.setAttribute("nologin" , "nologin");
+            return "redirect:/login";
+        }
+        User user = repository.findOne(id);
+        request.setAttribute("user", user);
+        return "usuariosEdit";
+    }
+
+    @PostMapping("/apply-user")
+    public String applyUser(Integer id, String username, String password, String name, String email,
+                            HttpServletRequest request){
+        if(!checkSession(request)){
+            request.setAttribute("nologin" , "nologin");
+            return "redirect:/login";
+        }
+        User user = repository.findOne(id);
+        user.setUsername(username);
+        if (!password.equals("")) {
+            user.setPassword(new CryptMD5().cryptMD5(password));
+        }
+        user.setNombre(name);
+        user.setCorreo(email);
+        repository.save(user);
+        HttpSession httpSession = request.getSession();
+        request.setAttribute("user", httpSession.getAttribute("user"));
+        return "redirect:/usuarios";
     }
 
     public static void saveCookie(String cookieName, String value, int maxAge, HttpServletResponse response) {
@@ -486,6 +583,19 @@ public class UserController {
         }
         return result;
     }
+
+    private List<CompraItem> getCompras(){
+        List<Compra> compraList = compraRepository.findAll();
+        List<CompraItem> result = new ArrayList<>();
+        for (Compra compra : compraList){
+            List<Producto> productosByCompra = getProductosByCompra(compra.getIdcompras());
+            CompraItem compraItem = new CompraItem(compra.getIdcompras(),compra.getFecha(), compra.getTotal(),
+                    compra.getIdenvio(),compra.getIdusuario(),productosByCompra);
+            result.add(compraItem);
+        }
+        return result;
+    }
+
 
 
 

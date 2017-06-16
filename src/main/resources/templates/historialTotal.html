@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Historial de Ventas</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/sb-admin.css}" />
+    <link th:href="@{/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <div th:replace="fragments/headers :: headerAdministracion">&nbsp;</div>
+
+    <div id="page-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Historial Ventas
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li>
+                            <i class="fa fa-dashboard"></i>  <a href="/admin">Dashboard</a>
+                        </li>
+                        <li class="active">
+                            <i class="fa fa-th-list"></i> Historial
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                <h1>Ventas realizadas</h1>
+                <h3>#_Compra &emsp;&emsp;&emsp; Fecha &emsp;&emsp;&emsp; Importe &emsp;&emsp;
+                    #_Envio &emsp; #_Usuario</h3>
+                <div th:each="compra,it : ${compras}" class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <div>
+                                    &emsp;&emsp;
+                                    <span th:text="'#' + ${compra.idcompras}"></span>
+                                    &ensp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                    <span th:text="${compra.fecha}"></span>
+                                    &emsp;&emsp;&emsp;&emsp;
+                                    $<span th:text="${compra.total}"></span>
+                                    &emsp;&emsp;&emsp;&emsp;
+                                    <span th:text="'#' + ${compra.idenvio}"></span>
+                                    &ensp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                    <span th:text="'#' + ${compra.idusuario}"></span>
+                                    &ensp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                    <a data-toggle="collapse" data-parent="#accordion" th:href="'#collapse' + ${it.index}">View Details</a>
+                                </div>
+                            </h4>
+                        </div>
+                        <div th:id="'collapse' + ${it.index}" class="panel-collapse collapse">
+                            <div th:each="prod : ${compra.productos}" class="panel-body">
+                                <div id="cuerpo" style="border-right-width: 70px">
+                                    <b>ID Producto:  </b><span th:text="${prod.idproducto}"></span><br></br>
+                                    <b>Nombre:       </b><span th:text="${prod.nombre}"></span><br></br>
+                                    <b>Precio:       </b><span th:text="'$' + ${prod.precio}"></span><br></br>
+                                </div>  <!-- /div panel-body -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+
+</body>
+
+</html>
