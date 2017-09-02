@@ -2,10 +2,7 @@ package com.proyecto.sistemas.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-//import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name = "compras")

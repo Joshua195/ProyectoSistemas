@@ -233,27 +233,27 @@ public class UserController {
             request.setAttribute("nologin" , "nologin");
             return "redirect:/login";
         }
-        Producto producto = productoRepository.findOne(id);
-        PE pe = getPE(id);
-        if (request.getSession().getAttribute("items") != null){
-            List<Item> items = (List<Item>) request.getSession().getAttribute("items");
-            boolean nuevoItem = true;
-            for (Item item : items){
-                if (item.getIdproducto() == producto.getIdproducto()){
-                    Integer existenciaActual = pe.getExistencia() - (item.getCantidad() + 1);
-                    if (existenciaActual > 0) {
-                        item.setCantidad(item.getCantidad() + 1);
-                        nuevoItem = false;
-                    }else {
-                        request.getSession().setAttribute("noexistencia", "noexistencia");
-                        return "redirect:/producto?id=" + producto.getIdproducto();
+            Producto producto = productoRepository.findOne(id);
+            PE pe = getPE(id);
+            if (request.getSession().getAttribute("items") != null){
+                List<Item> items = (List<Item>) request.getSession().getAttribute("items");
+                boolean nuevoItem = true;
+                for (Item item : items){
+                    if (item.getIdproducto() == producto.getIdproducto()){
+                        Integer existenciaActual = pe.getExistencia() - (item.getCantidad() + 1);
+                        if (existenciaActual > 0) {
+                            item.setCantidad(item.getCantidad() + 1);
+                            nuevoItem = false;
+                        }else {
+                            request.getSession().setAttribute("noexistencia", "noexistencia");
+                            return "redirect:/producto?id=" + producto.getIdproducto();
+                        }
                     }
                 }
-            }
-            if (nuevoItem){
-                Integer existenciaActual = pe.getExistencia() - 1;
-                if (existenciaActual > 0) {
-                    Item item = new Item(producto.getIdproducto(), producto.getNombre(), producto.getCategoria(), 1,
+                if (nuevoItem){
+                    Integer existenciaActual = pe.getExistencia() - 1;
+                    if (existenciaActual > 0) {
+                        Item item = new Item(producto.getIdproducto(), producto.getNombre(), producto.getCategoria(), 1,
                             producto.getPrecio(), producto.getDescripcion());
                     item.setDescuento(test);
                     items.add(item);
